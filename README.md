@@ -1,6 +1,6 @@
 ## 义码当仙之集合框架
 
-|||
+|Java集合框架图|Java集合框架简化图|
 |:----|:----|
 |![](images/集合框架图.png)|![](images/集合框架简化图.png) |
 
@@ -42,10 +42,19 @@ transient Object[] elementData;
 private static final int DEFAULT_CAPACITY = 10;
 
 /**
- * Constructs an empty list with an initial capacity of ten.
+ * Constructs an empty list with the specified initial capacity.
+ *
+ * @param  initialCapacity  the initial capacity of the list
+ * @throws IllegalArgumentException if the specified initial capacity is negative
  */
-public ArrayList() {
-    this.elementData = DEFAULTCAPACITY_EMPTY_ELEMENTDATA;
+public ArrayList(int initialCapacity) {
+    if (initialCapacity > 0) {
+        this.elementData = new Object[initialCapacity];
+    } else if (initialCapacity == 0) {
+        this.elementData = EMPTY_ELEMENTDATA;
+    } else {
+        throw new IllegalArgumentException("Illegal Capacity: " + initialCapacity);
+    }
 }
 ```
 
