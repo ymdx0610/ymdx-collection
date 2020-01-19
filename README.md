@@ -105,6 +105,8 @@ ArrayList，Vector主要区别为以下几点：
 
 ### LinkedList  
 
+> 示例项目：ymdx-collection -> collection-linkedlist  
+
 #### LinedList原理  
 LinkedList 和 ArrayList 一样，都实现了 List 接口，但其内部的数据结构有本质的不同。LinkedList 是基于链表实现的（通过名字也能区分开来），所以它的插入和删除操作比 ArrayList 更加高效。但也是由于其为基于链表的，所以随机访问的效率要比 ArrayList 差。  
 

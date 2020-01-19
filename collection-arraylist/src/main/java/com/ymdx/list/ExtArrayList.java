@@ -36,7 +36,7 @@ public class ExtArrayList<E> implements ExtList<E> {
     }
 
     public ExtArrayList() {
-        this(10);
+        this(DEFAULT_INIT_CAPACITY);
     }
 
     @Override
@@ -46,7 +46,7 @@ public class ExtArrayList<E> implements ExtList<E> {
 
     @Override
     public boolean isEmpty() {
-        return elementData.length == 0;
+        return size == 0;
     }
 
     @Override
@@ -70,7 +70,7 @@ public class ExtArrayList<E> implements ExtList<E> {
         if (size == elementData.length) {
             // 原数组容量
             int oldCapacity = elementData.length;
-            // 新数组容量
+            // 新数组容量，是原数组容量的1.5倍
             int newCapacity = oldCapacity + oldCapacity >> 1;
             // 新数组容量小于最小扩容容量，则将最小扩容容量赋值给新数组容量
             if (newCapacity < minCapacity) {
@@ -91,7 +91,7 @@ public class ExtArrayList<E> implements ExtList<E> {
         ensureExplicitCapacity(size + 1);
         System.arraycopy(elementData, index, elementData, index + 1, size - index);
         elementData[index] = e;
-        size ++;
+        size++;
     }
 
     @Override
@@ -118,7 +118,7 @@ public class ExtArrayList<E> implements ExtList<E> {
     public E remove(int index) {
         E e = get(index);
         int numMoved = elementData.length - index - 1;
-        if(numMoved > 0)
+        if (numMoved > 0)
             System.arraycopy(elementData, index + 1, elementData, index, numMoved);
         elementData[--size] = null;
         return e;
@@ -126,18 +126,18 @@ public class ExtArrayList<E> implements ExtList<E> {
 
     @Override
     public boolean remove(Object obj) {
-        if(obj == null){
-            for(int i=0; i < elementData.length; i++){
+        if (obj == null) {
+            for (int i = 0; i < elementData.length; i++) {
                 Object removing = elementData[i];
-                if(removing == null){
+                if (removing == null) {
                     remove(i);
                     return true;
                 }
             }
-        }else{
-            for(int i=0; i < elementData.length; i++){
+        } else {
+            for (int i = 0; i < elementData.length; i++) {
                 Object removing = elementData[i];
-                if(obj.equals(removing)){
+                if (obj.equals(removing)) {
                     remove(i);
                     return true;
                 }

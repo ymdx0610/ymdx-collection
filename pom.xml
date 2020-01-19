@@ -57,6 +57,7 @@
 
     <modules>
         <module>collection-arraylist</module>
+        <module>collection-linkedlist</module>
     </modules>
 
     <!-- 只定义依赖的版本，不会实际依赖 -->
