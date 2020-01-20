@@ -58,6 +58,7 @@
     <modules>
         <module>collection-arraylist</module>
         <module>collection-linkedlist</module>
+        <module>collection-hashmap</module>
     </modules>
 
     <!-- 只定义依赖的版本，不会实际依赖 -->

@@ -199,8 +199,11 @@ HashMap在扩容时，新数组的容量将是原来的2倍，由于容量发生
 1. 如果两个对象相同，那么它们的hashCode值一定要相同。也告诉我们重写equals方法，一定要重写hashCode方法，也就是说hashCode值要和类中的成员变量挂上钩，对象相同，成员变量相同，hashCode值一定相同。  
 2. 如果两个对象的hashCode相同，它们并不一定相同，这里的对象相同指的是用equals方法比较。  
 
+#### 基于ArrayList实现Map  
+> 示例代码：ymdx-collection -> collection-hashmap -> ExtArrayListMap.java  
 
 #### 基于LinkedList实现Map  
+> 示例代码：ymdx-collection -> collection-hashmap -> ExtLinkedListMap.java  
 
 #### 基于JDK1.7版本实现HashMap  
 
