@@ -52,8 +52,8 @@ public class ExtArrayListMap<Key, Value> implements ExtMap<Key, Value>{
         } else {
             Entry<Key, Value> newEntry = new Entry(key, value);
             entries.add(newEntry);
+            size ++;
         }
-        size ++;
     }
 
     @Override

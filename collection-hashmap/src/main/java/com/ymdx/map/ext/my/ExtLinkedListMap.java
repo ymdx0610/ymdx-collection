@@ -79,6 +79,7 @@ public class ExtLinkedListMap<Key, Value> implements ExtMap<Key, Value> {
             linkedList = new LinkedList<>();
             linkedList.add(newEntry);
             tables[hashValue] = linkedList;
+            size ++;
         }else{
             // 链表不为空，遍历链表
             for(Entry entry : linkedList){
@@ -89,10 +90,11 @@ public class ExtLinkedListMap<Key, Value> implements ExtMap<Key, Value> {
                 }else{
                     // hashCode相同，对象值不同的情况
                     linkedList.add(newEntry);
+                    size ++;
                 }
             }
         }
-        size ++;
+
     }
 
     @Override
