@@ -1,4 +1,4 @@
-package com.ymdx.map;
+package com.ymdx.map.ext.my;
 
 /**
  * @ClassName: Entry

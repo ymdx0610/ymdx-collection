@@ -1,11 +1,11 @@
-package com.ymdx.map;
+package com.ymdx.map.ext.my;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * @ClassName: ExtArrayListMap
- * @Description: 基于ArrayList实现Map，效率比较低
+ * @Description: 自定义Map，基于ArrayList实现，效率比较低
  * @Author: ymdx
  * @Email: y_m_d_x@163.com
  * @Date: 2020-01-20 14:25

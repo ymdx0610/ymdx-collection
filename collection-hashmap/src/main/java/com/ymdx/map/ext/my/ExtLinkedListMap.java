@@ -1,10 +1,10 @@
-package com.ymdx.map;
+package com.ymdx.map.ext.my;
 
 import java.util.LinkedList;
 
 /**
  * @ClassName: ExtLinkedListMap
- * @Description: 基于链表实现Map
+ * @Description: 自定义Map，基于数组+链表实现
  * @Author: ymdx
  * @Email: y_m_d_x@163.com
  * @Date: 2020-01-20 14:30
