@@ -13,7 +13,7 @@ import java.util.LinkedList;
 public class ExtLinkedListMap<Key, Value> implements ExtMap<Key, Value> {
 
     /**定义链表类型的数组*/
-    private LinkedList<Entry<Key, Value>>[] tables = new LinkedList[999];
+    private LinkedList<Entry<Key, Value>>[] table = new LinkedList[999];
     /**实际map大小*/
     private int size = 0;
 
@@ -43,7 +43,7 @@ public class ExtLinkedListMap<Key, Value> implements ExtMap<Key, Value> {
      */
     private Entry<Key, Value> getEntry(Key key){
         int hashValue = getHashValue(key);
-        LinkedList<Entry<Key, Value>> linkedList = tables[hashValue];
+        LinkedList<Entry<Key, Value>> linkedList = table[hashValue];
         if(linkedList != null){
             for (Entry<Key, Value> entry : linkedList){
                 if(entry.key.equals(key)){
@@ -62,7 +62,7 @@ public class ExtLinkedListMap<Key, Value> implements ExtMap<Key, Value> {
     private int getHashValue(Key key){
         int hashCode = key.hashCode();
         // 哈希算法计算散列值
-        int hashValue = hashCode % tables.length;
+        int hashValue = hashCode % table.length;
         return hashValue;
     }
 
@@ -73,12 +73,12 @@ public class ExtLinkedListMap<Key, Value> implements ExtMap<Key, Value> {
         // 根据key值获取hash值 -> 链表数组下标
         int hashValue = getHashValue(key);
         // 从链表数组中获取下标为hashValue的链表linkedList
-        LinkedList<Entry<Key, Value>> linkedList = tables[hashValue];
+        LinkedList<Entry<Key, Value>> linkedList = table[hashValue];
         if(linkedList == null){
             // 链表为空，表示第一此在下标为hashValue的位置存放值，需要新建链表，将新数据entry存放进去
             linkedList = new LinkedList<>();
             linkedList.add(newEntry);
-            tables[hashValue] = linkedList;
+            table[hashValue] = linkedList;
             size ++;
         }else{
             // 链表不为空，遍历链表
@@ -88,7 +88,7 @@ public class ExtLinkedListMap<Key, Value> implements ExtMap<Key, Value> {
                     // hashCode相同，对象值也相同的情况
                     entry.value = value;
                 }else{
-                    // hashCode相同，对象值不同的情况
+                    // hashCode取模的余数相同（即index相同），对象值不同的情况
                     linkedList.add(newEntry);
                     size ++;
                 }
@@ -100,7 +100,7 @@ public class ExtLinkedListMap<Key, Value> implements ExtMap<Key, Value> {
     @Override
     public Value remove(Key key) {
         int hashValue = getHashValue(key);
-        LinkedList<Entry<Key, Value>> linkedList = tables[hashValue];
+        LinkedList<Entry<Key, Value>> linkedList = table[hashValue];
         if(linkedList != null){
             Entry<Key, Value> entry = getEntry(key);
             if(entry != null){
