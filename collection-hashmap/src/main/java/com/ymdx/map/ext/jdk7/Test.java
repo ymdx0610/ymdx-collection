@@ -35,7 +35,6 @@ public class Test {
         System.out.println("------------");
         extHashMap.put("22号", "XXX");
         System.out.println(extHashMap.get("22号"));
-        System.out.println(extHashMap.get("22号"));
     }
 
 }
