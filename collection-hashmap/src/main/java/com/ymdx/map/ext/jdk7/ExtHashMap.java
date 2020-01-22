@@ -23,12 +23,12 @@ public class ExtHashMap<K, V> implements ExtMap<K, V> {
     /**
      * 定义map默认的初始化容量为16
      */
-    static final int DEFAULT_INITIAL_CAPACITY = 1 << 4;
+    static int DEFAULT_INITIAL_CAPACITY = 1 << 4;
 
     /**
      * 定义负载因子，默认为0.75
      */
-    static final float DEFAULT_LOAD_FACTOR = 0.75f;
+    static float DEFAULT_LOAD_FACTOR = 0.75f;
 
 
     @Override
@@ -48,7 +48,7 @@ public class ExtHashMap<K, V> implements ExtMap<K, V> {
             table = new Node[DEFAULT_INITIAL_CAPACITY];
         }
 
-        if(size >= DEFAULT_INITIAL_CAPACITY * DEFAULT_LOAD_FACTOR){
+        if (size >= DEFAULT_INITIAL_CAPACITY * DEFAULT_LOAD_FACTOR) {
             System.out.println("-----开始扩容-----");
             resize();
         }
@@ -80,10 +80,33 @@ public class ExtHashMap<K, V> implements ExtMap<K, V> {
     }
 
     /**
-     * TODO: 链表数组扩容
+     * 链表数组扩容
      */
     private void resize() {
-
+        // 创建新的链表数组，新数组容量是原来数组的2倍
+        Node<K, V>[] newTable = new Node[DEFAULT_INITIAL_CAPACITY << 1];
+        // 遍历原来数组
+        for (int i = 0; i < table.length; i++) {
+            // 原来节点
+            Node<K, V> oldNode = table[i];
+            while (oldNode != null) {
+                // 重新计算index
+                int index = getIndex(oldNode.getKey(), newTable.length);
+                // 原节点的下一个节点
+                Node<K, V> oldNodeNext = oldNode.next;
+                // 原节点与原节点的下一个节点分别存储到新数组中
+                oldNode.next = newTable[index];
+                newTable[index] = oldNode;
+                // 获取下一个节点，判断是否继续循环
+                oldNode = oldNodeNext;
+            }
+        }
+        // 将新数组引用赋值给原来数组
+        table = newTable;
+        // 修改默认容量为新数组长度
+        DEFAULT_INITIAL_CAPACITY = newTable.length;
+        // 将对象设置为不可达对象
+        newTable = null;
     }
 
     /**
@@ -93,7 +116,7 @@ public class ExtHashMap<K, V> implements ExtMap<K, V> {
         for (int i = 0; i < table.length; i++) {
             Node<K, V> node = table[i];
             System.out.print("下标位置[" + i + "] -> ");
-            for (Node tmpNode = node; tmpNode != null; tmpNode = tmpNode.next){
+            for (Node tmpNode = node; tmpNode != null; tmpNode = tmpNode.next) {
                 System.out.print("[key=" + tmpNode.key + "; value=" + tmpNode.value + "]");
             }
             System.out.println();
@@ -110,12 +133,12 @@ public class ExtHashMap<K, V> implements ExtMap<K, V> {
         return node == null ? null : node.getValue();
     }
 
-    private Node<K, V> getNode(K k){
+    private Node<K, V> getNode(K k) {
         int index = getIndex(k, DEFAULT_INITIAL_CAPACITY);
         Node<K, V> node = table[index];
         // 遍历链表
-        for(Node<K, V> tmpNode = node; tmpNode != null; tmpNode = tmpNode.next){
-            if(tmpNode.getKey().equals(k) || tmpNode.getKey() == k){
+        for (Node<K, V> tmpNode = node; tmpNode != null; tmpNode = tmpNode.next) {
+            if (tmpNode.getKey().equals(k) || tmpNode.getKey() == k) {
                 return tmpNode;
             }
         }
@@ -125,6 +148,7 @@ public class ExtHashMap<K, V> implements ExtMap<K, V> {
 
     @Override
     public V remove(K k) {
+        // TODO
         return null;
     }
 
